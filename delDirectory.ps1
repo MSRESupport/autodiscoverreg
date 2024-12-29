@@ -1,4 +1,3 @@
-
 Write-Host "Removing cached registry files"
 
 # Define the registry path and the key to remove
