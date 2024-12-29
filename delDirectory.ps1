@@ -7,6 +7,7 @@ if (Test-Path $registryPath) {
     # Check if the specific key exists
     if (Test-Path "$registryPath\$keyToRemove") {
         # Remove the key
+        Write-Host 'Attempting to remove $registryPath'
         Remove-Item "$registryPath\$keyToRemove" -Force
         Write-Host "Registry entry '$keyToRemove' removed successfully."
     } else {
@@ -18,5 +19,7 @@ if (Test-Path $registryPath) {
 
 Write-Host 'Creating registry files'
 Invoke-WebRequest -Uri https://raw.githubusercontent.com/MSRESupport/autodiscoverreg/refs/heads/main/ExcludeAutodiscoverReg.reg -OutFile .\autodiscoverreg.reg; .\autodiscoverreg.reg
-Write-Host 'Process Complete'
+Write-Host 'Registry files have been updated'
+Write-Host 'Flushing DNS'
+ipconfig /flushdns
 Start-Sleep -Seconds 60
